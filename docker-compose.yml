@@ -10,5 +10,7 @@ services:
         build: ./web
         volumes:
             - ./web:/app
+        environment:
+          - npm_config_unsafe_perm=true
         ports:
             - 8080:8080

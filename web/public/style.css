@@ -1,0 +1,17 @@
+*, html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body a:hover {
+text-decoration: none;
+}
+body a:focus,
+a:hover {
+text-decoration: none;
+}
+.navbar-collapse .nav-link {
+  font-size: 16px;
+  letter-spacing: 1px;
+  color:blue;
+}
