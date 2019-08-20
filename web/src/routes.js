@@ -6,5 +6,5 @@ import List from './components/list/List';
 
 
 export const routes = [
-  {path : "/liste" , name :"listeler", component : List }
+  {path : "/liste" ,  component : List }
 ]
