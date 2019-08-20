@@ -16,13 +16,13 @@ a:hover {
 text-decoration: none;
 }
 :root {
-  --defaultcolor:#ff7979;
+  --defaultcolor:rgba(55,227,181,1);
   --textfont: 'Raleway', sans-serif;
 }
 
 /*Header Vue*/
 .navbar-light{
-  background-color: var(--defaultcolor);
+  background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(55,227,181,1) 0%, rgba(78,228,126,0.54) 90% );
 }
 .navbar-light .navbar-nav .nav-link {
   font-size: 16px;
@@ -48,6 +48,26 @@ text-decoration: none;
   height: 80vh;
 }
 
-
-
 /*Footer Vue*/
+.footer {
+  background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(87,108,117,1) 0%, rgba(37,50,55,1) 100.2% );
+}
+.footer .text p {
+  font-family: var(--textfont);
+  color:#fff;
+  font-size: 13px;
+  font-weight: 300;
+}
+.copyright {
+  margin-top: 25px;
+  text-align: center;
+}
+.copyright p {
+  color:var(--defaultcolor);
+  font-family: var(--textfont);
+}
+.schollList p {
+  color:#fff;
+  font-size: 16px;
+  font-weight: 300;
+}
