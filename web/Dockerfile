@@ -2,10 +2,13 @@ FROM node:lts-alpine
 
 WORKDIR /app
 
-COPY . .
+RUN npm install vue
+#RUN npm install --save axios
+#RUN npm install vue-router
+RUN npm install -g @vue/cli
+RUN vue add @vue/cli-plugin-eslint
 
-RUN npm install --save axios
-RUN npm install vue-router
+COPY . .
 
 EXPOSE 8080
 

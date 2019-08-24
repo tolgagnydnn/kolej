@@ -10,5 +10,6 @@ services:
         build: ./web
         volumes:
             - ./web:/app
+            - /app/node_modules
         ports:
             - 8080:8080
