@@ -24,7 +24,7 @@
                   <p> Ortaokullar </p>
               </div>
               <div class="col-lg-3 col-md-3 col-sm-3 col-12">
-                  <p> Liseler merhaba </p>
+                  <p> Liseler  </p>
               </div>
           </div>
         </div>
@@ -33,6 +33,7 @@
         </div>
       </div>
     </div>
+
 
   </div>
 </template>

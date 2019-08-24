@@ -1,12 +1,17 @@
 @import url('https://fonts.googleapis.com/css?family=Oswald:200,300,400,500,600,700&display=swap&subset=latin-ext');
 @import url('https://fonts.googleapis.com/css?family=Raleway:200,300,400,400i,600,700,800,900&display=swap&subset=latin-ext');
-*, html {
+ html {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+}
+.mybox {
+    border: 1px solid black;
+    padding: 5px;
+    width: 100px;
 }
 body{
-  font-family: 'Oswald', sans-serif!important;
+  font-family: 'Oswald', sans-serif;
 }
 body a:hover {
 text-decoration: none;
