@@ -13,7 +13,7 @@ Sistem genelinde güncel teknolojiler kullanılacaktır. Önyüz (frontend) böl
 - Go
 - VueJS
 - Bootstrap
-- CSS
+- CSS (SASS)
 - HTML
 - docker
 - docker-compose
