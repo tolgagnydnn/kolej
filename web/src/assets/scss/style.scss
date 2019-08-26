@@ -1,0 +1,14 @@
+
+$renk:red;
+$font24:24px;
+$fontColor:blue;
+$fontColor2:green;
+
+@mixin tolga {
+  font-size: 25px;
+}
+
+.ana {
+  @include tolga;
+  color:$renk;
+}
