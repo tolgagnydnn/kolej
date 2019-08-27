@@ -7,7 +7,7 @@ Kolej projesi VueJS ve Go dili ile geliştirilmekte olan ve iki ayrı proje içe
     $ docker-compose up
 ```
 
-Sonrasında VueJS ve gerekli bağımlılıkları önyüz (frontend) için ve Go ve gerekli paketler arka uç (backend) için yüklenipkodlar derlenecek ve projeler çalışmaya başlayacaktır. Önyüze ulaşmak için tarayıcınıza **http://localhost:8080** ve API bölümüne ulaşmak için **htt://locahost:8090** yazabilirsiniz.
+Sonrasında VueJS ve gerekli bağımlılıkları önyüz (frontend) için ve Go ve gerekli paketler arka uç (backend) için yüklenipkodlar derlenecek ve projeler çalışmaya başlayacaktır. Önyüze ulaşmak için tarayıcınıza **http://localhost:8080** ve API bölümüne ulaşmak için **http://locahost:8090** yazabilirsiniz.
 
 ## Amaç
 Özel okullar özelinde bir çok seçenek ile karşı karşıya kalan öğrenci velilerinin daha doğru, basit ve detaylı bir seçim yapabilmeleri için mevcut özel okulların farklı kriterlere göre karşılaştırılmasını sağlamak.
