@@ -2,77 +2,58 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 
 	"github.com/gorilla/mux"
 )
 
-// Person struct
-type Person struct {
-	ID        string   `json:"id,omitempty"`
-	Firstname string   `json:"firstname,omitempty"`
-	Lastname  string   `json:"lastname,omitempty"`
-	Address   *Address `json:"address,omitempty"`
+func OkulListe(w http.ResponseWriter, r *http.Request) {
+	setupResponse(&w, r)
+
+	var o Okul
+	var liste = o.Liste()
+
+	json.NewEncoder(w).Encode(liste)
 }
 
-// Address struct
-type Address struct {
-	City  string `json:"city,omitempty"`
-	State string `json:"state,omitempty"`
-}
+func Index(w http.ResponseWriter, r *http.Request) {
+	var html = `<!doctype html><html lang="tr"><head>
+		<meta charset="utf-8">
+		<title>Kolej Projesi API index sayfası</title>
+		<style type="text/css">
+			.tablo { background-color:#eee;border-collapse:collapse; }
+			.tablo th { background-color:#000;color:white;}
+			.tablo td, .tablo th { padding:12px;border:1px solid #000; }
+		</style>
+		</head>
+		<body>
+			<h2>Metod Listesi</h2>
+			<table class="tablo">
+			<tr>
+				<th>Adres</th>
+				<th>Tanım</th>
+			</tr>
+			<tr>
+				<td><a href="/">/</a></td>
+				<td>API metodlarını listeleyen indeks sayfasını gösterir.</td>
+			</tr>
+			<tr>
+				<td><a href="okul/liste">/okul/liste</a></td>
+				<td>Sistemde kayıtlı tüm okulları bir JSON listesi olarar verir.</td>
+			</tr>
+			</table>
+		</body></html>`
 
-var people []Person
-
-// GetPersonEndpoint function
-func GetPersonEndpoint(w http.ResponseWriter, req *http.Request) {
-	setupResponse(&w, req)
-	params := mux.Vars(req)
-	for _, item := range people {
-		if item.ID == params["id"] {
-			json.NewEncoder(w).Encode(item)
-			return
-		}
-	}
-	json.NewEncoder(w).Encode(&Person{})
-}
-
-// GetPeopleEndpoint function
-func GetPeopleEndpoint(w http.ResponseWriter, req *http.Request) {
-	setupResponse(&w, req)
-	json.NewEncoder(w).Encode(people)
-}
-
-func CreatePersonEndpoint(w http.ResponseWriter, req *http.Request) {
-	params := mux.Vars(req)
-	var person Person
-	_ = json.NewDecoder(req.Body).Decode(&person)
-	person.ID = params["id"]
-	people = append(people, person)
-	json.NewEncoder(w).Encode(people)
-}
-
-func DeletePersonEndpoint(w http.ResponseWriter, req *http.Request) {
-	params := mux.Vars(req)
-	for index, item := range people {
-		if item.ID == params["id"] {
-			people = append(people[:index], people[index+1:]...)
-			break
-		}
-	}
-	json.NewEncoder(w).Encode(people)
+	fmt.Fprintf(w, "%s", html)
 }
 
 func main() {
 	router := mux.NewRouter()
 
-	people = append(people, Person{ID: "1", Firstname: "Nic", Lastname: "Raboy", Address: &Address{City: "Dublin", State: "CA"}})
-	people = append(people, Person{ID: "2", Firstname: "Maria", Lastname: "Raboy"})
-
-	router.HandleFunc("/people", GetPeopleEndpoint).Methods("GET")
-	router.HandleFunc("/people/{id}", GetPersonEndpoint).Methods("GET")
-	router.HandleFunc("/people/{id}", CreatePersonEndpoint).Methods("POST")
-	router.HandleFunc("/people/{id}", DeletePersonEndpoint).Methods("DELETE")
+	router.HandleFunc("/", Index).Methods("GET")
+	router.HandleFunc("/okul/liste", OkulListe).Methods("GET")
 
 	log.Println("API Service is starting...(8090)")
 	log.Fatal(http.ListenAndServe(":8090", router))
@@ -82,4 +63,5 @@ func setupResponse(w *http.ResponseWriter, req *http.Request) {
 	(*w).Header().Set("Access-Control-Allow-Origin", "*")
 	(*w).Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
 	(*w).Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
+	(*w).Header().Set("Content-Type", "application/json")
 }
