@@ -1,4 +1,6 @@
 
+@import "deneme";
+
 $renk:red;
 $font24:24px;
 $fontColor:blue;
@@ -8,7 +10,10 @@ $fontColor2:green;
   font-size: 25px;
 }
 
-.ana {
+.wrapper {
   @include tolga;
-  color:$renk;
+  background-color:$renk5;
 }
+/*
+"scss": "node-sass --watch src/assets/scss -o src/assets/css"
+*/
