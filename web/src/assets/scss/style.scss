@@ -15,7 +15,7 @@ $fontColor2:green;
 
 .wrapper {
   @include tolga;
-  background-color:$renk5;
+  background-color:$fontColor;
 }
 /*
 "scss": "node-sass --watch src/assets/scss -o src/assets/css"
