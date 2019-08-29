@@ -1,5 +1,6 @@
 package main
 
+// Okul model
 type Okul struct {
 	ID      int    `json:"id,omitempty"`
 	Adi     string `json:"adi,omitempty"`
@@ -10,6 +11,10 @@ type Okul struct {
 	Semt    string `json:"semt,omitempty"`
 }
 
+var liste = make([]Okul, 0)
+
+// Liste tüm okulların listesini getirir.
+// Dönüş değeri Okul modeli dizisidir.
 func (o *Okul) Liste() []Okul {
 	var o1 = Okul{
 		ID:      1,
@@ -57,7 +62,6 @@ func (o *Okul) Liste() []Okul {
 		Semt:    "İnegöl",
 	}
 
-	var liste = make([]Okul, 0)
 	liste = append(liste, o1)
 	liste = append(liste, o2)
 	liste = append(liste, o3)
@@ -65,4 +69,10 @@ func (o *Okul) Liste() []Okul {
 	liste = append(liste, o5)
 
 	return liste
+}
+
+// Ekle veritabanına yeni bir okul bilgisi ekler.
+func (o *Okul) Ekle(okul Okul) bool {
+	liste = append(liste, okul)
+	return true
 }
