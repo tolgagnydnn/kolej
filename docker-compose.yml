@@ -6,6 +6,8 @@ services:
             - ./api:/go/src/api
         ports:
             - 8090:8090
+        depends_on:
+            - mongo
     web:
         build: ./web
         volumes:
@@ -17,6 +19,10 @@ services:
     mongo:
         image: mongo
         restart: always
+        volumes:
+            - ./data:/data/db
+        ports:
+            - 27017:27017
         environment:
             MONGO_INITDB_ROOT_USERNAME: root
             MONGO_INITDB_ROOT_PASSWORD: example

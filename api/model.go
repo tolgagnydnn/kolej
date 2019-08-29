@@ -1,5 +1,15 @@
 package main
 
+import (
+	"context"
+	"fmt"
+	"log"
+
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
+)
+
 // Okul model
 type Okul struct {
 	ID      int    `json:"id,omitempty"`
@@ -11,68 +21,69 @@ type Okul struct {
 	Semt    string `json:"semt,omitempty"`
 }
 
+var mongoClient *mongo.Client
 var liste = make([]Okul, 0)
+
+func init() {
+	clientOptions := options.Client().ApplyURI("mongodb://root:example@mongo:27017")
+
+	client, err := mongo.Connect(context.TODO(), clientOptions)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Check the connection
+	err = client.Ping(context.TODO(), nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	mongoClient = client
+
+	log.Println("Connected to MongoDB!")
+}
 
 // Liste tüm okulların listesini getirir.
 // Dönüş değeri Okul modeli dizisidir.
-func (o *Okul) Liste() []Okul {
-	var o1 = Okul{
-		ID:      1,
-		Adi:     "Özel Cent Ortaokulu",
-		Adres:   "Tarabya Şalçıkır Cad. No:136 İstanbul/Sarıyer",
-		Telefon: "0212 2233133",
-		Website: "www.centkoleji.k12.tr",
-		Sehir:   "İstanbul",
-		Semt:    "Sarıyer",
-	}
-	var o2 = Okul{
-		ID:      2,
-		Adi:     "İstanbul Erkek Liseliler Eğitim Vakfı Özel 125.Yıl Ortaokulu",
-		Adres:   "Nişantepe Mah. Ensar Cad. No: 4/2 İstanbul/Çekmeköy",
-		Telefon: "0216 3046909",
-		Website: "http://www.ielev.k12.tr/",
-		Sehir:   "İstanbul",
-		Semt:    "Çekmeköy",
-	}
-	var o3 = Okul{
-		ID:      3,
-		Adi:     "Özel Batı Koleji Ortaokulu",
-		Adres:   "İnönü Mah. 1750 Sokak No:13-17 Ankara/Yenimahalle",
-		Telefon: "0312 2775454",
-		Website: "www.batikoleji.k12",
-		Sehir:   "Ankara",
-		Semt:    "Yenimahalle",
-	}
-	var o4 = Okul{
-		ID:      4,
-		Adi:     "Özel Konya Nesibe Aydın Ortaokulu",
-		Adres:   "Beyhekim Mah. Darül Hilafet Sok. No:1 Konya/Selçuklu",
-		Telefon: "0332 3208511",
-		Website: "www.nesibeaydin.k12.tr/konya/",
-		Sehir:   "Konya",
-		Semt:    "Selçuklu",
-	}
-	var o5 = Okul{
-		ID:      5,
-		Adi:     "Özel İnegöl Doğa Ortaokulu",
-		Adres:   "Akhisar Mah. Bursa Karayolu No:4 İnegöl/ Bursa Bursa/İnegöl",
-		Telefon: "0224 7114100",
-		Website: "www.dogakoleji.k12.tr",
-		Sehir:   "Bursa",
-		Semt:    "İnegöl",
+func (o *Okul) Liste() []*Okul {
+	collection := mongoClient.Database("kolej").Collection("okullar")
+
+	var liste []*Okul
+
+	cur, err := collection.Find(context.TODO(), bson.D{{}}, nil)
+	if err != nil {
+		log.Fatal(err)
 	}
 
-	liste = append(liste, o1)
-	liste = append(liste, o2)
-	liste = append(liste, o3)
-	liste = append(liste, o4)
-	liste = append(liste, o5)
+	for cur.Next(context.TODO()) {
+		var okul Okul
+		err := cur.Decode(&okul)
+		if err != nil {
+			log.Fatal(err)
+		}
 
+		liste = append(liste, &okul)
+	}
+
+	if err := cur.Err(); err != nil {
+		log.Fatal(err)
+	}
+
+	cur.Close(context.TODO())
+
+	fmt.Printf("Found multiple documents (array of pointers): %+v\n", liste)
 	return liste
 }
 
 // Ekle veritabanına yeni bir okul bilgisi ekler.
 func (o *Okul) Ekle(okul Okul) bool {
-	liste = append(liste, okul)
+	collection := mongoClient.Database("kolej").Collection("okullar")
+
+	res, err := collection.InsertOne(context.TODO(), okul)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	log.Println("Inserted a Single Document: ", res.InsertedID)
 	return true
 }
