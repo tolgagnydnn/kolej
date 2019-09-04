@@ -4,19 +4,84 @@
  * Son duzenleme: 28.08.2019
  */
 
-$renk:red;
-$font24:24px;
-$fontColor:blue;
-$fontColor2:green;
-
-@mixin tolga {
-  font-size: 25px;
+@import url('https://fonts.googleapis.com/css?family=Oswald:200,300,400,500,600,700&display=swap&subset=latin-ext');
+@import url('https://fonts.googleapis.com/css?family=Raleway:200,300,400,400i,600,700,800,900&display=swap&subset=latin-ext');
+ html {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.mybox {
+    border: 1px solid black;
+    padding: 5px;
+    width: 100px;
+}
+body{
+  font-family: 'Oswald', sans-serif;
+  &:hover, &focus {
+  text-decoration: none;
+  }
 }
 
-.wrapper {
-  @include tolga;
-  background-color:$fontColor;
+/*Değişkenler*/
+$green:rgba(55,227,181,1);
+$mainFont: 'Raleway', sans-serif;
+
+/*Header Vue*/
+.navbar-light{
+  background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(55,227,181,1) 0%, rgba(78,228,126,0.54) 90% );
+  .navbar-nav .nav-link {
+    font-size: 16px;
+    letter-spacing: 1px;
+    color:white;
+    transition: 0.8s ease;
+    &:hover {
+      color:#000;
+    }
+  }
+  .navbar-brand {
+    padding-left: 85px;
+  }
+  .navbar-collapse {
+    padding-right: 85px;
+  }
 }
+
 /*
-"scss": "node-sass --watch src/assets/scss -o src/assets/css"
+url('/images/banner.jpg');
+url('assets/images/banner.jpg');
+url('~/images/banner.jpg');
+şeklinde bg-image çekebilrsin.
 */
+.banner {
+  background-image: url('/images/banner.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 80vh;
+}
+
+/*Footer Vue*/
+.footer {
+  background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(87,108,117,1) 0%, rgba(37,50,55,1) 100.2% );
+  .text p {
+    font-family: var(--textfont);
+    color:#fff;
+    font-size: 13px;
+    font-weight: 300;
+  }
+  .schollList p {
+    color:#fff;
+    font-size: 16px;
+    font-weight: 300;
+  }
+  .copyright {
+    margin-top: 25px;
+    text-align: center;
+    p {
+     color:var(--defaultcolor);
+     font-family: var(--textfont);
+   }
+  }
+}
