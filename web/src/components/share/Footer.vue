@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-lg-4 col-md-4 col-sm-4 col-12">
           <div class="footerİmg text-center">
-            <img src="images/logo.png" class="img-fluid">
+            <img src="/images/logo.png" class="img-fluid">
           </div>
             <div class="text py-3">
                 <p>
@@ -33,7 +33,5 @@
         </div>
       </div>
     </div>
-
-
   </div>
 </template>
