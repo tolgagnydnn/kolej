@@ -10,18 +10,9 @@
 
                   <div class="collapse navbar-collapse" id="navbarSupportedContent">
                       <ul class="navbar-nav ml-lg-auto">
-                          <li class="nav-item">
-                              <a class="nav-link" href="index.html">Anasayfa</a>
-                          </li>
-                          <li class="nav-item">
-                              <a class="nav-link" href="kurumsal.html"> Hakkımızda </a>
-                          </li>
-                          <li class="nav-item">
-                              <a class="nav-link" href="iletisim.html">Okul Listesi</a>
-                          </li>
-                          <li class="nav-item">
-                              <a class="nav-link" href="iletisim.html"> Bize Ulaşın</a>
-                          </li>
+                          <li class="nav-item" v-for="links in menuLinks">
+                              <a href="#" class="nav-link"> {{links.link}} </a>
+                           </li>
                         </ul>
                   </div>
               </nav>
@@ -31,11 +22,16 @@
 <script>
 
 export default {
-  data () {
+  data(){
     return {
-
+      menuLinks : [
+        {link: "Anasayfa"},
+        {link: "Hakkımızda"},
+        {link: "Bize Ulaşın"}
+      ]
     }
   }
+
 }
 
 </script>
