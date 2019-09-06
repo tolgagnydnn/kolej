@@ -25,7 +25,6 @@
                         </ul>
                   </div>
               </nav>
-              <div class="banner">  </div>
         </div>
 </template>
 
