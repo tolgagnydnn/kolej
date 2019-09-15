@@ -20,7 +20,7 @@ export default {
   },
   methods: {
       etkinlikListe: function() {
-          axios.get('http://192.168.1.55:8090/okul/liste')
+          axios.get('http://localhost:8090/okul/liste')
           .then((result) => {
               this.schoolList = result.data
           });
@@ -28,17 +28,4 @@ export default {
   }
 }
 
-
-/*
-created(){
-  axios.get('http://192.168.1.55:8090/okul/liste')
-  .then(function (response) {
-    let data = response.data;
-    for(let key in data){
-      this.schoolList.push({...data[key], id: key});
-    }
-  })
-  .catch(function (error) {
-  console.log(error);
-})*/
 </script>

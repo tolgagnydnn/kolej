@@ -3,5 +3,5 @@ import Footer from './components/share/Footer'
 import List from './components/list/List'
 
 export const routes = [
-  { path: '/liste', component: List }
+  { path: '/', component: List }
 ]
