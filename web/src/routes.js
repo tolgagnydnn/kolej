@@ -1,7 +1,7 @@
 import Header from './components/share/Header'
 import Footer from './components/share/Footer'
-import List from './components/list/List'
+import Content from './components/list/Content'
 
 export const routes = [
-  { path: '/', component: List }
+  { path: '/', component: Content }
 ]
