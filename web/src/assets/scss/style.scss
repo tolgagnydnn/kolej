@@ -23,10 +23,52 @@ body{
   }
 }
 
+
+/*transition*/
+  .delay-enter { // Başlangıç değeri 0 yani hiç gözükmeyecek.
+    opacity: 0.3;
+  }
+  .delay-enter-active { // Başlangıçtan bitişe kadar geçen zaman
+    transition: opacity 2s ease;
+  }
+  .delay-leave-active {
+    transition: opacity 2s ease;
+    opacity: 0;
+  }
+/*transition*/
+
+
+/*Animation*/
+.slide-enter-active {
+  animation: slide-in 1s ease forwards;   // Animasyonun başladığı an.
+}
+.slide-leave-active {
+  animation: slide-out 1s ease forwards; // Animasyonun bittiği an.
+}
+@keyframes slide-in {
+  from {
+    transform: translateY(30px); // Başlangıç Animasyonu
+  }
+  to {
+    transform: translateY(0px);
+  }
+}
+@keyframes slide-out {
+  from {
+    transform: translateY(0px); // Bitiş Animasyonu
+  }
+  to {
+    transform: translateY(30px);
+  }
+}
+
+/*Animation*/
+
+
 /*Variables*/
 $green:rgba(55,227,181,1);
 $white:#ffff;
-$black:#1e1e2f;
+$black:#1a1a1a;
 $mainFont: 'Raleway', sans-serif;
 
 
@@ -39,16 +81,21 @@ $mainFont: 'Raleway', sans-serif;
   color:$black;
 }
 
+
+
 /*Header Vue*/
 .navbar-light{
   background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(55,227,181,1) 0%, rgba(78,228,126,0.54) 90% );
-  .navbar-nav .nav-link {
-    font-size: 16px;
-    letter-spacing: 1px;
-    color:$white;
-    transition: 0.8s ease;
-    &:hover {
-      color:$black;
+  .navbar-nav {
+    a {
+      font-size: 16px;
+      letter-spacing: 1px;
+      color:$white;
+      transition: 0.8s ease;
+      text-decoration: none;
+      &:hover {
+        color:$black;
+      }
     }
   }
   .navbar-brand {
@@ -69,7 +116,7 @@ $mainFont: 'Raleway', sans-serif;
     @include mainTitle;
   }
   .listBox {
-    padding: 2rem;
+    padding: 2.5rem;
     border:solid 1px #ddd;
     border-radius: 4px 4px 0 0;
     transition: .5s ease;
@@ -108,15 +155,15 @@ $mainFont: 'Raleway', sans-serif;
 
 /*Footer Vue*/
 .footer {
-  background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(87,108,117,1) 0%, rgba(37,50,55,1) 100.2% );
+  background-color: $black;
   .text p {
     font-family:$mainFont;
-    color:#fff;
+    color:$white;
     font-size: 13px;
     font-weight: 300;
   }
   .schollList p {
-    color:#fff;
+    color:$white;
     font-size: 16px;
     font-weight: 300;
   }
@@ -141,6 +188,7 @@ $mainFont: 'Raleway', sans-serif;
   background: $green;
   border-radius: 5px;
 }
+
 
 /*
 url('/images/banner.jpg');

@@ -3,13 +3,17 @@
     <h1> Okul Listesi </h1>
     <div class="row py-4">
           <!--ListBox Start -->
+          <transition name="slide" appear>
             <appList> </appList>
+          </transition>
           <!-- Listbox End -->
+
+          <div class="col-lg-4 col-md-4 col-sm-4 col-12">
+            <!-- Buraya Başka Compoentler gelecek -->
+          </div>
     </div>
 
-        <div class="col-lg-4 col-md-4 col-sm-4 col-12">
-            <!-- Buraya Başka Compoentler gelecek -->
-        </div>
+
     </div>
   </div>
 </template>
