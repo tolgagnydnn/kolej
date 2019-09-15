@@ -23,9 +23,21 @@ body{
   }
 }
 
-/*Değişkenler*/
+/*Variables*/
 $green:rgba(55,227,181,1);
+$white:#ffff;
+$black:#1e1e2f;
 $mainFont: 'Raleway', sans-serif;
+
+
+/*Mixins*/
+@mixin mainTitle {
+  font-size: 23px;
+  letter-spacing: 1px;
+  font-weight: 300;
+  line-height: 30px;
+  color:$black;
+}
 
 /*Header Vue*/
 .navbar-light{
@@ -33,10 +45,10 @@ $mainFont: 'Raleway', sans-serif;
   .navbar-nav .nav-link {
     font-size: 16px;
     letter-spacing: 1px;
-    color:white;
+    color:$white;
     transition: 0.8s ease;
     &:hover {
-      color:#000;
+      color:$black;
     }
   }
   .navbar-brand {
@@ -46,20 +58,59 @@ $mainFont: 'Raleway', sans-serif;
     padding-right: 85px;
   }
 }
+/*School List*/
+.listContainer {
+  a {
+    text-decoration: none;
+    color:inherit;
+    transition: .5s ease;
+  }
+  h1 {
+    @include mainTitle;
+  }
+  .listBox {
+    padding: 2rem;
+    border:solid 1px #ddd;
+    border-radius: 4px 4px 0 0;
+    transition: .5s ease;
+    &:hover {
+      border-left-width: 3px;
+      border-left-color:$green;
+      box-shadow: 0 4px 11px 0 rgba(82, 71, 71, 0.23);
+      background-color: #f7f7f7;
+    }
 
-/*
-url('/images/banner.jpg');
-url('assets/images/banner.jpg');
-url('~/images/banner.jpg');
-şeklinde bg-image çekebilrsin.
-*/
-
+    .listContent {
+      .schollName {
+        a {
+         font-size: 16px;
+         font-weight: 600;
+         letter-spacing: 1px;
+         border-bottom:solid 1px #ddd;
+         font-family: $mainFont;
+        }
+      }
+      .schoolAdress {
+        p {
+          font-size: 11px;
+          font-weight: 500;
+          padding-top: 20px;
+          font-family: $mainFont;
+        }
+      }
+      .schollWeb {
+          @extend .schoolAdress;
+          color:$green;
+      }
+    }
+  }
+}
 
 /*Footer Vue*/
 .footer {
   background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(87,108,117,1) 0%, rgba(37,50,55,1) 100.2% );
   .text p {
-    font-family: var(--textfont);
+    font-family:$mainFont;
     color:#fff;
     font-size: 13px;
     font-weight: 300;
@@ -78,3 +129,22 @@ url('~/images/banner.jpg');
    }
   }
 }
+
+/*Scrollbar*/
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background: $black;
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb {
+  background: $green;
+  border-radius: 5px;
+}
+
+/*
+url('/images/banner.jpg');
+url('assets/images/banner.jpg');
+url('~/images/banner.jpg');
+şeklinde bg-image çekebilrsin.
+*/
